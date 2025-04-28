@@ -4,6 +4,8 @@ import difflib
 import os
 
 app = Flask(__name__)
+
+# Replace with your real TMDB API key
 TMDB_API_KEY = "483a8d6b53d5bb68c110d2c17aa6d725"
 
 def search_tmdb(query):
@@ -16,16 +18,27 @@ def get_movie_details(tmdb_id, media_type='movie'):
     response = requests.get(url)
     return response.json()
 
-def get_top_imdb_movies():
-    url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={TMDB_API_KEY}"
+def get_trending_movies():
+    url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={TMDB_API_KEY}"
+    response = requests.get(url)
+    return response.json().get('results', [])
+
+def get_trending_series():
+    url = f"https://api.themoviedb.org/3/trending/tv/week?api_key={TMDB_API_KEY}"
+    response = requests.get(url)
+    return response.json().get('results', [])
+
+def get_trending_anime():
+    # Anime is a genre = 16 for Animation
+    url = f"https://api.themoviedb.org/3/discover/tv?api_key={TMDB_API_KEY}&with_genres=16"
     response = requests.get(url)
     return response.json().get('results', [])
 
 @app.route('/')
 def home():
-    trending_movies = get_top_imdb_movies()[:6]
-    trending_series = search_tmdb('series')[:6]
-    trending_anime = search_tmdb('anime')[:6]
+    trending_movies = get_trending_movies()[:6]
+    trending_series = get_trending_series()[:6]
+    trending_anime = get_trending_anime()[:6]
     return render_template('home.html', movies=trending_movies, series=trending_series, anime=trending_anime)
 
 @app.route('/search', methods=['POST'])
