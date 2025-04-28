@@ -7,12 +7,16 @@ body {
 
 header, footer {
     background-color: #1f1f1f;
-    padding: 1em;
+    padding: 1rem;
     text-align: center;
 }
 
 footer {
     font-size: 14px;
+}
+
+.container {
+    padding: 1rem;
 }
 
 .card-grid {
@@ -38,7 +42,7 @@ footer {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .video-container iframe {
@@ -66,14 +70,27 @@ footer {
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    font-size: 14px;
 }
 
 .episode-bar button.active {
     background-color: #007bff;
-    color: #fff;
+    color: white;
 }
 
 .episode-bar button:hover {
     background-color: #0056b3;
-    color: #fff;
+    color: white;
+}
+
+/* Responsive episode dropdown only visible on mobile */
+@media (min-width: 768px) {
+    .mobile-dropdown {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .episode-bar {
+        display: none;
+    }
 }
