@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 import requests
 import difflib
-import os
 
 app = Flask(__name__)
 
@@ -54,8 +53,14 @@ def search():
 @app.route('/watch/<media_type>/<int:tmdb_id>')
 def watch(media_type, tmdb_id):
     details = get_movie_details(tmdb_id, media_type)
-    imdb_id = details.get('imdb_id')  # SuperStream needs IMDb ID
-    return render_template('watch.html', details=details, media_type=media_type, tmdb_id=tmdb_id, imdb_id=imdb_id)
+    return render_template('watch.html', details=details, media_type=media_type, tmdb_id=tmdb_id)
+
+# 🛡️ Proxy route to load vidsrc.to iframe safely
+@app.route('/proxy/embed/<media_type>/<int:tmdb_id>')
+def proxy_embed(media_type, tmdb_id):
+    vidsrc_url = f"https://vidsrc.to/embed/{media_type}/{tmdb_id}"
+    response = requests.get(vidsrc_url)
+    return Response(response.content, content_type=response.headers.get('Content-Type'))
 
 if __name__ == '__main__':
     app.run(debug=True)
