@@ -23,9 +23,15 @@
         <div class="row row-cols-2 row-cols-md-3 g-4">
             {% for movie in movies %}
             <div class="col text-center">
-                <a href="/watch/movie/{{ movie.id }}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-fluid">
-                </a>
+                <div class="card">
+                    <a href="/watch/movie/{{ movie.id }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{ movie.title }}</p>
+                        <p class="card-subtitle">SS 1 | EPS 1</p> <!-- Example for season and episode -->
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -36,9 +42,15 @@
         <div class="row row-cols-2 row-cols-md-3 g-4">
             {% for s in series %}
             <div class="col text-center">
-                <a href="/watch/tv/{{ s.id }}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ s.poster_path }}" alt="{{ s.name }}" class="img-fluid">
-                </a>
+                <div class="card">
+                    <a href="/watch/tv/{{ s.id }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ s.poster_path }}" alt="{{ s.name }}">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{ s.name }}</p>
+                        <p class="card-subtitle">SS 1 | EPS 1</p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -49,14 +61,19 @@
         <div class="row row-cols-2 row-cols-md-3 g-4">
             {% for a in anime %}
             <div class="col text-center">
-                <a href="/watch/tv/{{ a.id }}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ a.poster_path }}" alt="{{ a.name }}" class="img-fluid">
-                </a>
+                <div class="card">
+                    <a href="/watch/tv/{{ a.id }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ a.poster_path }}" alt="{{ a.name }}">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{ a.name }}</p>
+                        <p class="card-subtitle">SS 1 | EPS 1</p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </section>
-
 </div>
 
 <footer class="mt-5">
