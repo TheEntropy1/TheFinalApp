@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #121212;
+    background-color: #121212; /* Keep dark background */
     color: #e0e0e0;
     font-family: 'Arial', sans-serif;
 }
@@ -19,6 +19,7 @@ footer {
     padding: 1rem;
 }
 
+/* Grid for home/search pages */
 .card-grid {
     display: flex;
     flex-wrap: wrap;
@@ -27,17 +28,41 @@ footer {
     margin: 1rem 0;
 }
 
-.card-grid img {
-    width: 100%;
-    max-width: 180px;
-    border-radius: 10px;
+.card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 140px;
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 14px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s;
 }
 
-.card-grid img:hover {
+.card:hover {
     transform: scale(1.05);
 }
 
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #333;
+}
+
+.card-title {
+    font-weight: bold;
+    padding: 0.5rem 0;
+    font-size: 14px;
+}
+
+.card-subtitle {
+    color: #aaaaaa;
+    font-size: 12px;
+    padding-bottom: 0.5rem;
+}
+
+/* Video player */
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
@@ -53,10 +78,7 @@ footer {
     height: 100%;
 }
 
-.back-button {
-    margin: 1rem 0;
-}
-
+/* Episode bar + mobile dropdown */
 .episode-bar {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +105,6 @@ footer {
     color: white;
 }
 
-/* Responsive episode dropdown only visible on mobile */
 @media (min-width: 768px) {
     .mobile-dropdown {
         display: none;
@@ -93,4 +114,9 @@ footer {
     .episode-bar {
         display: none;
     }
+}
+
+/* Search input styling */
+.input-group {
+    margin-bottom: 1rem;
 }
