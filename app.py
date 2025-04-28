@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Replace with your real TMDB API key
+# Your TMDB API Key
 TMDB_API_KEY = "483a8d6b53d5bb68c110d2c17aa6d725"
 
 def search_tmdb(query):
@@ -29,7 +29,6 @@ def get_trending_series():
     return response.json().get('results', [])
 
 def get_trending_anime():
-    # Anime is a genre = 16 for Animation
     url = f"https://api.themoviedb.org/3/discover/tv?api_key={TMDB_API_KEY}&with_genres=16"
     response = requests.get(url)
     return response.json().get('results', [])
@@ -55,7 +54,8 @@ def search():
 @app.route('/watch/<media_type>/<int:tmdb_id>')
 def watch(media_type, tmdb_id):
     details = get_movie_details(tmdb_id, media_type)
-    return render_template('watch.html', details=details, media_type=media_type, tmdb_id=tmdb_id)
+    imdb_id = details.get('imdb_id')  # SuperStream needs IMDb ID
+    return render_template('watch.html', details=details, media_type=media_type, tmdb_id=tmdb_id, imdb_id=imdb_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
